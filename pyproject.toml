@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "visa-vfs-api"
+version = "0.1.0"
+description = "A python selenium scraper API for VFS global visa application centers"
+authors = ["Akaam Shamerany <info@akaam.dev>"]
+readme = "README.md"
+packages = [{include = "visa_vfs_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+selenium = "^4.8"
+chromedriver-binary = "^110.0.5481.30.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
