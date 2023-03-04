@@ -1,7 +1,10 @@
 from visa_vfs_api.utils.driver import open_browser, when_element_is_present
 from visa_vfs_api.utils.vfs import choose_selections, get_appointment_login_link
 from visa_vfs_api.models import CountryCode, Option
+from time import sleep
+from selenium.common.exceptions import ElementClickInterceptedException
 
+MAX_INTERCEPTION_ATTEMPTS = 5
 
 X_PATH_EMAIL = '//*[@id="mat-input-0"]'
 X_PATH_PASSWORD = '//*[@id="mat-input-1"]'
@@ -22,7 +25,18 @@ def login(email: str, password: str):
 
 
 def start_new_booking():
-    when_element_is_present(X_PATH_NEW_BOOKING_BUTTON, 2).click()
+    error = False
+    for attempt in range(MAX_INTERCEPTION_ATTEMPTS):
+        try:
+            when_element_is_present(X_PATH_NEW_BOOKING_BUTTON, 2).click()
+            if error:
+                print(f"Succeeded after {attempt+1} attempts")
+        except ElementClickInterceptedException:
+            error = True
+            print(
+                f"Failed to click, trying again in 1s  (attempt {attempt+1}/{MAX_INTERCEPTION_ATTEMPTS})"
+            )
+            sleep(1)
 
 
 if __name__ == "__main__":
