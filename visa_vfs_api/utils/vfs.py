@@ -1,5 +1,6 @@
 from time import sleep
 from typing import List
+
 from visa_vfs_api.models import CountryCode, Option
 from visa_vfs_api.utils.driver import attempt_click
 

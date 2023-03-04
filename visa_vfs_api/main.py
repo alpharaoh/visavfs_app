@@ -1,10 +1,10 @@
+from visa_vfs_api.models import CountryCode, Option
 from visa_vfs_api.utils.driver import open_browser, when_element_is_present
 from visa_vfs_api.utils.vfs import (
     attempt_click,
-    select_dropdown_options,
     get_appointment_login_link,
+    select_dropdown_options,
 )
-from visa_vfs_api.models import CountryCode, Option
 
 EXAMPLE_EMAIL = "commitsnips@gmail.com"
 EXAMPLE_PASSWORD = "Akaam2001@"

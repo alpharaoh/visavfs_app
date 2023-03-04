@@ -1,3 +1,4 @@
+# Poetry
 [tool.poetry]
 name = "visa-vfs-api"
 version = "0.1.0"
@@ -15,3 +16,35 @@ chromedriver-binary = "^110.0.5481.30.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+# Formatting and linting
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | .*venv
+)/
+'''
+
+[tool.isort]
+skip_glob = ["*venv/*"]
+profile = "black"
+
+[tool.mypy]
+exclude = [
+  ".*venv/",
+  "tests/"
+]
+disallow_untyped_defs = true
+ignore_missing_imports = false
+

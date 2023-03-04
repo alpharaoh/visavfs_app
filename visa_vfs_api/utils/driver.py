@@ -1,8 +1,16 @@
-from selenium.common.exceptions import ElementClickInterceptedException
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 from time import sleep
+
+from selenium.common.exceptions import (
+    ElementClickInterceptedException,
+    ElementNotInteractableException,
+    ElementNotSelectableException,
+    ElementNotVisibleException,
+    NoSuchElementException,
+)
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+
 from visa_vfs_api import driver
 
 MAX_INTERCEPTION_ATTEMPTS = 5
@@ -23,7 +31,13 @@ def attempt_click(x_path: str):
             if error:
                 print(f"Succeeded after {attempt+1} attempts")
                 break
-        except ElementClickInterceptedException:
+        except (
+            ElementClickInterceptedException,
+            ElementNotVisibleException,
+            ElementNotInteractableException,
+            ElementNotSelectableException,
+            NoSuchElementException,
+        ):
             error = True
             print(
                 f"Failed to click {x_path}, trying again in 1s (attempt {attempt+1}/{MAX_INTERCEPTION_ATTEMPTS})"
